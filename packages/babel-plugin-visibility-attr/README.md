@@ -5,9 +5,9 @@ A Babel plugin to declaratively control React component behavior with data-visib
 ## ✨ Features
 
 You write
-- `<Component data-visible={condition} />`
+- `<SomeComponent data-visible={condition} />`
 And it's transforms into (but you don't see it)
-- `condition && <Component />`
+- `condition && <SomeComponent />`
 
 ## 🔧 Install
 

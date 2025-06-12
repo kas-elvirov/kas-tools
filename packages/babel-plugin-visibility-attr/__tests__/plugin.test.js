@@ -4,12 +4,12 @@ const generator = require('@babel/generator');
 const plugin = require('../index');
 
 const possibleCases = [
-  ['<MyComponent data-visible={isVisible} />'],
-  ['<MyComponent data-visible={isVisible}></MyComponent>'],
-  ['<MyComponent data-visible={isVisible}>test</MyComponent>'],
-  ['<MyComponent data-visible={isVisible} open={true}>test</MyComponent>'],
-  ['<MyComponent data-visible={isVisible} open={true} {...props}>test</MyComponent>'],
-  ['<MyComponent data-visible={isVisible} open={true} {...props}><div>test</div></MyComponent>'],
+  ['<SomeComponent data-visible={isVisible} />'],
+  ['<SomeComponent data-visible={isVisible}></SomeComponent>'],
+  ['<SomeComponent data-visible={isVisible}>test</SomeComponent>'],
+  ['<SomeComponent data-visible={isVisible} open={true}>test</SomeComponent>'],
+  ['<SomeComponent data-visible={isVisible} open={true} {...props}>test</SomeComponent>'],
+  ['<SomeComponent data-visible={isVisible} open={true} {...props}><div>test</div></SomeComponent>'],
 ]
 
 const transform = (code, opts = {}) =>
@@ -22,18 +22,18 @@ const transform = (code, opts = {}) =>
 
 describe('babel-plugin-visibility-attr', () => {
   it('main test (with react transformation)', () => {
-    const output = transform('<Box data-visible={condition} />');
+    const output = transform('<SomeComponent data-visible={condition} />');
 
     /**
      * Doesn't quite beautiful what we see in "toContain"
      * but it's what we are expecting for
-     * - condition && <Box />
+     * - condition && <SomeComponent />
     */
-    expect(output).toContain('condition && /*#__PURE__*/React.createElement(Box, null);');
+    expect(output).toContain('condition && /*#__PURE__*/React.createElement(SomeComponent, null);');
   });
 
   it('AST test', () => {
-    const outputAST = babel.transform('<Box data-visible={condition} />', {
+    const outputAST = babel.transform('<SomeComponent data-visible={condition} />', {
       filename: 'file.jsx',
       presets: ['@babel/preset-react'],
       plugins: [[plugin, {}]],
@@ -43,22 +43,22 @@ describe('babel-plugin-visibility-attr', () => {
 
     const printed = generator.generate(outputAST).code;
 
-    expect(printed).toContain('React.createElement(Box');
+    expect(printed).toContain('React.createElement(SomeComponent');
   });
 
   it('snapshot test', () => {
-    const result = transform('<Box data-visible={condition} />');
+    const result = transform('<SomeComponent data-visible={condition} />');
 
     expect(result).toMatchSnapshot();
   });
 
   it('jsx test', () => {
-    const result = babel.transformSync('<Box data-visible={condition} />', {
+    const result = babel.transformSync('<SomeComponent data-visible={condition} />', {
       plugins: [["@babel/plugin-syntax-jsx", {}], [plugin, {}]],
       configFile: false,
       ast: false,
     });
 
-    expect(result.code).toContain('condition && <Box />');
+    expect(result.code).toContain('condition && <SomeComponent />');
   });
 });
