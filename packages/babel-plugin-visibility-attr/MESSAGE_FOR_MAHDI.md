@@ -132,14 +132,14 @@ So now it require a few next steps
 
 1. Install plugin
 
-> npm install @kas-tools/babel-plugin-visibility-attr --save-dev
+> npm install @kas-tools/babel-plugin-react-visibility-attribute --save-dev
 
 2. Configure babel.config.js
 
 ```json
 {
   "plugins": [
-    ["@kas-tools/babel-plugin-visibility-attr", {
+    ["@kas-tools/babel-plugin-react-visibility-attribute", {
       "attrName": "data-if",
       "enabled": true,
     }]

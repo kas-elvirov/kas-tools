@@ -1,4 +1,4 @@
-# @kas-tools/babel-plugin-visibility-attr
+# @kas-tools/babel-plugin-react-visibility-attribute
 
 A Babel plugin that transforms `data-if` attributes into conditional rendering expressions (`cond && <Component />`) at build time
 
@@ -16,7 +16,7 @@ And it's transforms into (but you don't see it)
 ## 🔧 Install
 
 ```bash
-npm install @kas-tools/babel-plugin-visibility-attr --save-dev
+npm install @kas-tools/babel-plugin-react-visibility-attribute --save-dev
 ```
 
 ## 🧪 Usage
@@ -27,7 +27,7 @@ npm install @kas-tools/babel-plugin-visibility-attr --save-dev
 
 {
   "plugins": [
-    ["@kas-tools/babel-plugin-visibility-attr", {
+    ["@kas-tools/babel-plugin-react-visibility-attribute", {
       "attrName": "data-if",
       "enabled": true,
     }]
@@ -46,7 +46,7 @@ export default defineConfig({
     react({
       babel: {
         plugins: [
-          ['@kas-tools/babel-plugin-visibility-attr', {
+          ['@kas-tools/babel-plugin-react-visibility-attribute', {
             attrName: 'data-if',
             enabled: true
           }]
