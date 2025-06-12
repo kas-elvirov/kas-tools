@@ -1,7 +1,7 @@
 {
   "name": "@kas-tools/babel-plugin-react-visibility-attribute",
   "description": "A Babel plugin that transforms `data-if` attributes into conditional rendering expressions at build time",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "author": {
     "name": "Kas Elvirov",
     "email": "kas.elvirov@gmail.com",

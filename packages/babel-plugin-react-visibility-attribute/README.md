@@ -21,9 +21,8 @@ npm install @kas-tools/babel-plugin-react-visibility-attribute --save-dev
 
 ## 🧪 Usage
 
-
-```jsonc
-// babel.config.js
+**babel.config.js**
+```json
 
 {
   "plugins": [
@@ -35,9 +34,8 @@ npm install @kas-tools/babel-plugin-react-visibility-attribute --save-dev
 }
 ```
 
+**vite.config.js**
 ```js
-// vite.config.js
-
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react';
 
