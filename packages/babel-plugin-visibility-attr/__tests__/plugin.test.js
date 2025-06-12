@@ -12,6 +12,20 @@ const possibleCases = [
   ['<SomeComponent data-visible={isVisible} open={true} {...props}><div>test</div></SomeComponent>'],
 ]
 
+const DATA = {
+  INPUT: '<SomeComponent data-visible={condition} />',
+  OUTPUT: {
+    /**
+     * Doesn't quite beautiful what we see in "toContain"
+     * but it's what we are expecting for
+     * - condition && <SomeComponent />
+    */
+    transformed: 'condition && /*#__PURE__*/React.createElement(SomeComponent, null);',
+    ast: 'React.createElement(SomeComponent',
+    jsx: 'condition && <SomeComponent />',
+  },
+};
+
 const transform = (code, opts = {}) =>
   babel.transform(code, {
     filename: 'file.jsx',
@@ -22,18 +36,13 @@ const transform = (code, opts = {}) =>
 
 describe('babel-plugin-visibility-attr', () => {
   it('main test (with react transformation)', () => {
-    const output = transform('<SomeComponent data-visible={condition} />');
+    const output = transform(DATA.INPUT);
 
-    /**
-     * Doesn't quite beautiful what we see in "toContain"
-     * but it's what we are expecting for
-     * - condition && <SomeComponent />
-    */
-    expect(output).toContain('condition && /*#__PURE__*/React.createElement(SomeComponent, null);');
+    expect(output).toContain(DATA.OUTPUT.transformed);
   });
 
   it('AST test', () => {
-    const outputAST = babel.transform('<SomeComponent data-visible={condition} />', {
+    const outputAST = babel.transform(DATA.INPUT, {
       filename: 'file.jsx',
       presets: ['@babel/preset-react'],
       plugins: [[plugin, {}]],
@@ -43,22 +52,22 @@ describe('babel-plugin-visibility-attr', () => {
 
     const printed = generator.generate(outputAST).code;
 
-    expect(printed).toContain('React.createElement(SomeComponent');
+    expect(printed).toContain(DATA.OUTPUT.ast);
   });
 
   it('snapshot test', () => {
-    const result = transform('<SomeComponent data-visible={condition} />');
+    const result = transform(DATA.INPUT);
 
     expect(result).toMatchSnapshot();
   });
 
   it('jsx test', () => {
-    const result = babel.transformSync('<SomeComponent data-visible={condition} />', {
+    const result = babel.transformSync(DATA.INPUT, {
       plugins: [["@babel/plugin-syntax-jsx", {}], [plugin, {}]],
       configFile: false,
       ast: false,
     });
 
-    expect(result.code).toContain('condition && <SomeComponent />');
+    expect(result.code).toContain(DATA.OUTPUT.jsx);
   });
 });
