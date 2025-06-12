@@ -108,7 +108,7 @@ const POSSIBLE_CASES = [
   },
 ];
 
-describe('babel-plugin-visibility-attr', () => {
+describe('babel-plugin-react-visibility-attribute', () => {
   each.default(POSSIBLE_CASES).describe('when transforming %s', (testCase) => {
     it('should match transformed output', () => {
       const result = transformWrapper(testCase.input.condition).code;

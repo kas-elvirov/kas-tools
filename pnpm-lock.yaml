@@ -27,7 +27,7 @@ importers:
         specifier: ^5.0.0
         version: 5.0.2
 
-  packages/babel-plugin-visibility-attr:
+  packages/babel-plugin-react-visibility-attribute:
     dependencies:
       '@babel/core':
         specifier: ^7.0.0
