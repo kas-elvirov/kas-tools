@@ -1,5 +1,4 @@
 import type { PluginObj } from '@babel/core';
-import * as t from '@babel/types';
 
 interface IPluginOptions {
   attrName?: string;

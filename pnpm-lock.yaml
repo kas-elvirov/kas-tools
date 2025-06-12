@@ -42,12 +42,21 @@ importers:
       '@babel/preset-react':
         specifier: ^7.27.1
         version: 7.27.1(@babel/core@7.0.0)
+      '@babel/types':
+        specifier: ^7.27.6
+        version: 7.27.6
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.6.3
+      '@types/babel__core':
+        specifier: ^7.20.5
+        version: 7.20.5
       '@types/jest':
         specifier: ^29.5.14
         version: 29.5.14
+      add:
+        specifier: ^2.0.6
+        version: 2.0.6
       jest:
         specifier: ^30.0.0
         version: 30.0.0(@types/node@24.0.1)(ts-node@10.9.2)
@@ -1459,6 +1468,10 @@ packages:
     resolution: {integrity: sha512-NZyJarBfL7nWwIq+FDL6Zp/yHEhePMNnnJ0y3qfieCrmNvYct8uvtiV41UvlSe6apAfk0fY1FbWx+NwfmpvtTg==}
     engines: {node: '>=0.4.0'}
     hasBin: true
+    dev: true
+
+  /add@2.0.6:
+    resolution: {integrity: sha512-j5QzrmsokwWWp6kUcJQySpbG+xfOBqqKnup3OIk1pz+kB/80SLorZ9V8zHFLO92Lcd+hbvq8bT+zOGoPkmBV0Q==}
     dev: true
 
   /ajv@6.12.6:
