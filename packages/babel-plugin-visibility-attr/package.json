@@ -1,0 +1,29 @@
+{
+  "name": "@kas-tools/babel-plugin-visibility-attr",
+  "version": "0.1.0",
+  "author": {
+    "name": "Kas Elvirov",
+    "email": "kas.elvirov@gmail.com",
+    "url": "https://kas-elvirov.com"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint": "eslint index.js",
+    "test": "jest --config jest.config.ts"
+  },
+  "peerDependencies": {
+    "@babel/core": "^7.0.0"
+  },
+  "devDependencies": {
+    "@babel/generator": "^7.27.5",
+    "@babel/plugin-syntax-jsx": "^7.27.1",
+    "@babel/preset-react": "^7.27.1",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@types/jest": "^29.5.14",
+    "jest": "^30.0.0",
+    "ts-jest": "^29.4.0",
+    "ts-node": "^10.9.2"
+  }
+}
