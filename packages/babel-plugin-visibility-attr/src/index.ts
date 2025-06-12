@@ -1,4 +1,12 @@
-module.exports = function (babel, pluginOptions = {}) {
+import type { PluginObj } from '@babel/core';
+import * as t from '@babel/types';
+
+interface IPluginOptions {
+  attrName?: string;
+  enabled?: boolean;
+}
+
+export default function plugin(babel: typeof import('@babel/core'), pluginOptions: IPluginOptions = {}): PluginObj {
   const { types: t } = babel;
 
   const {
@@ -29,11 +37,13 @@ module.exports = function (babel, pluginOptions = {}) {
 
         if (attrIndex !== -1) {
           const visibleAttrNode = attrs[attrIndex];
+          // @ts-expect-error
           const condition = visibleAttrNode.value?.expression || t.booleanLiteral(true);
 
           attrs.splice(attrIndex, 1);
 
           path.replaceWith(
+            // @ts-expect-error
             t.ExpressionStatement(
               t.logicalExpression('&&', condition, path.node)
             )

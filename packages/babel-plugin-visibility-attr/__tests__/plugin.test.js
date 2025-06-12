@@ -3,7 +3,7 @@ const each = require('jest-each');
 const babel = require('@babel/core');
 const generator = require('@babel/generator');
 
-const plugin = require('../index');
+const plugin = require('../src/index');
 
 /**
  * Just wrapper to write less code
