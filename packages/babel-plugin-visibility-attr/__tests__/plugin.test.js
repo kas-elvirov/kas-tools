@@ -26,39 +26,35 @@ const DATA = {
   },
 };
 
-const transform = (code, opts = {}) =>
-  babel.transform(code, {
+const transformWrapper = (code, opts = {}, transformOpts = {}) => {
+  return babel.transform(code, {
     filename: 'file.jsx',
     presets: ['@babel/preset-react'],
     plugins: [[plugin, opts]],
     configFile: false,
-  }).code;
+    ...transformOpts,
+  });
+}
 
 describe('babel-plugin-visibility-attr', () => {
   it('main test (with react transformation)', () => {
-    const output = transform(DATA.INPUT);
+    const output = transformWrapper(DATA.INPUT).code;
 
     expect(output).toContain(DATA.OUTPUT.transformed);
   });
 
-  it('AST test', () => {
-    const outputAST = babel.transform(DATA.INPUT, {
-      filename: 'file.jsx',
-      presets: ['@babel/preset-react'],
-      plugins: [[plugin, {}]],
-      configFile: false,
-      ast: true,
-    }).ast;
-
-    const printed = generator.generate(outputAST).code;
-
-    expect(printed).toContain(DATA.OUTPUT.ast);
-  });
-
-  it('snapshot test', () => {
-    const result = transform(DATA.INPUT);
+  it('main test (snapshot)', () => {
+    const result = transformWrapper(DATA.INPUT).code;
 
     expect(result).toMatchSnapshot();
+  });
+
+  it('ast test', () => {
+    const output = transformWrapper(DATA.INPUT, {}, { ast: true }).ast;
+
+    const printed = generator.generate(output).code;
+
+    expect(printed).toContain(DATA.OUTPUT.ast);
   });
 
   it('jsx test', () => {
