@@ -1,7 +1,7 @@
 {
   "name": "@kas-tools/babel-plugin-visibility-attr",
   "description": "A Babel plugin that transforms `data-visible` attributes into conditional rendering expressions at build time",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": {
     "name": "Kas Elvirov",
     "email": "kas.elvirov@gmail.com",
