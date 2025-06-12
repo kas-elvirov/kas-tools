@@ -1,6 +1,10 @@
-# babel-plugin-visibility-attr
+# @kas-tools/babel-plugin-ux-visibility
 
-A Babel plugin to declaratively control React component behavior with data-visible attribute. The main purpose - to make markup clean ✨
+A Babel plugin that transforms `data-visible` attributes into conditional rendering expressions (`cond && <Component />`) at build time
+
+---
+
+The main purpose is to "make markup clean again" ✊
 
 ## ✨ Features
 
