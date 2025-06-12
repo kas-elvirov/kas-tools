@@ -22,7 +22,7 @@ npm install @kas-tools/babel-plugin-visibility-attr --save-dev
 ## 🧪 Usage
 
 
-```json
+```jsonc
 // babel.config.js
 
 {
@@ -63,6 +63,22 @@ export default defineConfig({
 
 ```jsx
 <SomeComponent data-if={isVisible} />
+```
+
+### In the browser
+
+```jsx
+// If isVisible === true
+
+<SomeComponent />
+
+```
+
+```jsx
+// If isVisible === false
+
+null // nothing
+
 ```
 
 ### Output in production build
