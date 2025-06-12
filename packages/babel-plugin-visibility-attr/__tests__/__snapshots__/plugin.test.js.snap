@@ -1,45 +1,27 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`babel-plugin-visibility-attr when transforming {
-  input: '<SomeComponent data-visible={condition} />',
-  output: [Object]
-} should match snapshot 1`] = `"condition && /*#__PURE__*/React.createElement(SomeComponent, null);"`;
+exports[`babel-plugin-visibility-attr when transforming { input: [Object], output: [Object] } should match snapshot 1`] = `"condition && /*#__PURE__*/React.createElement(SomeComponent, null);"`;
 
-exports[`babel-plugin-visibility-attr when transforming {
-  input: '<SomeComponent data-visible={condition} open={true} {...props}><div>test</div></SomeComponent>',
-  output: [Object]
-} should match snapshot 1`] = `
-"function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
-condition && /*#__PURE__*/React.createElement(SomeComponent, _extends({
+exports[`babel-plugin-visibility-attr when transforming { input: [Object], output: [Object] } should match snapshot 2`] = `"condition && /*#__PURE__*/React.createElement(SomeComponent, null);"`;
+
+exports[`babel-plugin-visibility-attr when transforming { input: [Object], output: [Object] } should match snapshot 3`] = `"condition && /*#__PURE__*/React.createElement(SomeComponent, null, "test");"`;
+
+exports[`babel-plugin-visibility-attr when transforming { input: [Object], output: [Object] } should match snapshot 4`] = `
+"condition && /*#__PURE__*/React.createElement(SomeComponent, {
   open: true
-}, props), /*#__PURE__*/React.createElement("div", null, "test"));"
+}, "test");"
 `;
 
-exports[`babel-plugin-visibility-attr when transforming {
-  input: '<SomeComponent data-visible={condition} open={true} {...props}>test</SomeComponent>',
-  output: [Object]
-} should match snapshot 1`] = `
+exports[`babel-plugin-visibility-attr when transforming { input: [Object], output: [Object] } should match snapshot 5`] = `
 "function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 condition && /*#__PURE__*/React.createElement(SomeComponent, _extends({
   open: true
 }, props), "test");"
 `;
 
-exports[`babel-plugin-visibility-attr when transforming {
-  input: '<SomeComponent data-visible={condition} open={true}>test</SomeComponent>',
-  output: [Object]
-} should match snapshot 1`] = `
-"condition && /*#__PURE__*/React.createElement(SomeComponent, {
+exports[`babel-plugin-visibility-attr when transforming { input: [Object], output: [Object] } should match snapshot 6`] = `
+"function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
+condition && /*#__PURE__*/React.createElement(SomeComponent, _extends({
   open: true
-}, "test");"
+}, props), /*#__PURE__*/React.createElement("div", null, "test"));"
 `;
-
-exports[`babel-plugin-visibility-attr when transforming {
-  input: '<SomeComponent data-visible={condition}></SomeComponent>',
-  output: [Object]
-} should match snapshot 1`] = `"condition && /*#__PURE__*/React.createElement(SomeComponent, null);"`;
-
-exports[`babel-plugin-visibility-attr when transforming {
-  input: '<SomeComponent data-visible={condition}>test</SomeComponent>',
-  output: [Object]
-} should match snapshot 1`] = `"condition && /*#__PURE__*/React.createElement(SomeComponent, null, "test");"`;

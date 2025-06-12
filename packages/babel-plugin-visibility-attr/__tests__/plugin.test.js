@@ -35,51 +35,75 @@ const normalize = str => {
 */
 const POSSIBLE_CASES = [
   {
-    input: '<SomeComponent data-visible={condition} />',
+    input: {
+      condition: '<SomeComponent data-visible={condition} />',
+      falsy: '<SomeComponent data-visible={false} />',
+    },
     output: {
       transformed: 'condition && /*#__PURE__*/React.createElement(SomeComponent, null);',
-      ast: 'React.createElement(SomeComponent',
+      ast: 'condition && /*#__PURE__*/React.createElement(SomeComponent, null);',
       jsx: 'condition && <SomeComponent />',
+      falsy: 'false && /*#__PURE__*/React.createElement(SomeComponent, null);',
     },
   },
   {
-    input: '<SomeComponent data-visible={condition}></SomeComponent>',
+    input: {
+      condition: '<SomeComponent data-visible={condition}></SomeComponent>',
+      falsy: '<SomeComponent data-visible={false}></SomeComponent>',
+    },
     output: {
       transformed: 'condition && /*#__PURE__*/React.createElement(SomeComponent, null);',
-      ast: 'React.createElement(SomeComponent',
-      jsx: 'condition && <SomeComponent></SomeComponent>',
+      ast: 'condition && /*#__PURE__*/React.createElement(SomeComponent, null);',
+      jsx: 'condition && <SomeComponent></SomeComponent>;',
+      falsy: 'false && /*#__PURE__*/React.createElement(SomeComponent, null);',
     },
   },
   {
-    input: '<SomeComponent data-visible={condition}>test</SomeComponent>',
+    input: {
+      condition: '<SomeComponent data-visible={condition}>test</SomeComponent>',
+      falsy: '<SomeComponent data-visible={false}>test</SomeComponent>',
+    },
     output: {
       transformed: 'condition && /*#__PURE__*/React.createElement(SomeComponent, null, "test");',
       ast: 'React.createElement(SomeComponent',
-      jsx: 'condition && <SomeComponent>test</SomeComponent>',
+      jsx: 'condition && <SomeComponent>test</SomeComponent>;',
+      falsy: 'false && /*#__PURE__*/React.createElement(SomeComponent, null, "test");',
     },
   },
   {
-    input: '<SomeComponent data-visible={condition} open={true}>test</SomeComponent>',
+    input: {
+      condition: '<SomeComponent data-visible={condition} open={true}>test</SomeComponent>',
+      falsy: '<SomeComponent data-visible={false} open={true}>test</SomeComponent>',
+    },
     output: {
       transformed: 'condition && /*#__PURE__*/React.createElement(SomeComponent, { open: true }, "test");',
       ast: 'React.createElement(SomeComponent',
-      jsx: 'condition && <SomeComponent open={true}>test</SomeComponent>',
+      jsx: 'condition && <SomeComponent open={true}>test</SomeComponent>;',
+      falsy: 'false && /*#__PURE__*/React.createElement(SomeComponent, { open: true }, "test");',
     },
   },
   {
-    input: '<SomeComponent data-visible={condition} open={true} {...props}>test</SomeComponent>',
+    input: {
+      condition: '<SomeComponent data-visible={condition} open={true} {...props}>test</SomeComponent>',
+      falsy: '<SomeComponent data-visible={false} open={true} {...props}>test</SomeComponent>',
+    },
     output: {
-      transformed: 'condition && /*#__PURE__*/React.createElement(SomeComponent, _extends({ open: true }, props), "test");',
-      ast: 'React.createElement(SomeComponent',
-      jsx: 'condition && <SomeComponent open={true} {...props}>test</SomeComponent>',
+      transformed: 'condition && /*#__PURE__*/React.createElement(SomeComponent, _extends({ open:true},props), "test");',
+      ast: 'condition && /*#__PURE__*/React.createElement(SomeComponent, _extends({ open:true},props), "test");',
+      jsx: 'condition && <SomeComponent open={true} {...props}>test</SomeComponent>;',
+      falsy: 'false && /*#__PURE__*/React.createElement(SomeComponent, _extends({ open:true }, props), "test");',
     },
   },
   {
-    input: '<SomeComponent data-visible={condition} open={true} {...props}><div>test</div></SomeComponent>',
+    input: {
+      condition: '<SomeComponent data-visible={condition} open={true} {...props}><div>test</div></SomeComponent>',
+      falsy: '<SomeComponent data-visible={false} open={true} {...props}><div>test</div></SomeComponent>',
+    },
     output: {
-      transformed: 'condition && /*#__PURE__*/React.createElement(SomeComponent, _extends({ open: true }, props), /*#__PURE__*/React.createElement("div",null,"test"));',
-      ast: 'React.createElement(SomeComponent',
-      jsx: 'condition && <SomeComponent open={true} {...props}><div>test</div></SomeComponent>',
+      transformed: 'condition && /*#__PURE__*/React.createElement(SomeComponent, _extends({ open: true }, props),/*#__PURE__*/React.createElement("div", null, "test"));',
+      ast: 'condition && /*#__PURE__*/React.createElement(SomeComponent, _extends({ open: true }, props),/*#__PURE__*/React.createElement("div", null, "test"));',
+      jsx: 'condition && <SomeComponent open={true} {...props}><div>test</div></SomeComponent>;',
+      falsy: 'false && /*#__PURE__*/React.createElement(SomeComponent, _extends({ open: true }, props),/*#__PURE__*/React.createElement("div", null, "test"));',
     },
   },
 ];
@@ -87,20 +111,26 @@ const POSSIBLE_CASES = [
 describe('babel-plugin-visibility-attr', () => {
   each.default(POSSIBLE_CASES).describe('when transforming %s', (testCase) => {
     it('should match transformed output', () => {
-      const result = transformWrapper(testCase.input).code;
+      const result = transformWrapper(testCase.input.condition).code;
 
       expect(normalize(result)).toContain(normalize(testCase.output.transformed));
     });
 
+    it('should match transformed output (with false)', () => {
+      const result = transformWrapper(testCase.input.falsy).code;
+
+      expect(normalize(result)).toContain(normalize(testCase.output.falsy));
+    });
+
     it('should match AST structure', () => {
-      const astResult = transformWrapper(testCase.input, {}, { ast: true }).ast;
+      const astResult = transformWrapper(testCase.input.condition, {}, { ast: true }).ast;
       const printed = generator.generate(astResult).code;
 
-      expect(printed).toContain(testCase.output.ast);
+      expect(normalize(printed)).toContain(normalize(testCase.output.ast));
     });
 
     it('should preserve JSX intention', () => {
-      const result = babel.transformSync(testCase.input, {
+      const result = babel.transformSync(testCase.input.condition, {
         plugins: [["@babel/plugin-syntax-jsx"], [plugin, {}]],
         configFile: false,
         ast: false,
@@ -110,7 +140,7 @@ describe('babel-plugin-visibility-attr', () => {
     });
 
     it('should match snapshot', () => {
-      const result = transformWrapper(testCase.input).code;
+      const result = transformWrapper(testCase.input.condition).code;
 
       expect(result).toMatchSnapshot();
     });
