@@ -1,6 +1,6 @@
 export default function defineVisibilityBabelPlugin(babel, pluginOptions = {}) {
     const { types: t } = babel;
-    const { attrName = 'data-visible', enabled = true, } = pluginOptions;
+    const { attrName = 'data-if', enabled = true, } = pluginOptions;
     return {
         visitor: {
             JSXElement(path) {

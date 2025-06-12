@@ -1,6 +1,6 @@
 # @kas-tools/babel-plugin-visibility-attr
 
-A Babel plugin that transforms `data-visible` attributes into conditional rendering expressions (`cond && <Component />`) at build time
+A Babel plugin that transforms `data-if` attributes into conditional rendering expressions (`cond && <Component />`) at build time
 
 ---
 
@@ -9,7 +9,7 @@ The main purpose is to "make markup clean again" ✊
 ## ✨ Features
 
 You write
-- `<SomeComponent data-visible={condition} />`
+- `<SomeComponent data-if={condition} />`
 And it's transforms into (but you don't see it)
 - `condition && <SomeComponent />`
 
@@ -21,15 +21,40 @@ npm install @kas-tools/babel-plugin-visibility-attr --save-dev
 
 ## 🧪 Usage
 
+
 ```json
+// babel.config.js
+
 {
   "plugins": [
     ["@kas-tools/babel-plugin-visibility-attr", {
-      "attrName": "data-visible",
+      "attrName": "data-if",
       "enabled": true,
     }]
   ]
 }
+```
+
+```js
+// vite.config.js
+
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+  plugins: [
+    react({
+      babel: {
+        plugins: [
+          ['@kas-tools/babel-plugin-visibility-attr', {
+            attrName: 'data-if',
+            enabled: true
+          }]
+        ]
+      }
+    })
+  ]
+})
 ```
 
 ## 🧾 Example
@@ -37,7 +62,7 @@ npm install @kas-tools/babel-plugin-visibility-attr --save-dev
 ### Input in dev mode
 
 ```jsx
-<SomeComponent data-visible={isVisible} />
+<SomeComponent data-if={isVisible} />
 ```
 
 ### Output in production build

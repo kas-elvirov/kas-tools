@@ -140,7 +140,7 @@ So now it require a few next steps
 {
   "plugins": [
     ["@kas-tools/babel-plugin-visibility-attr", {
-      "attrName": "data-visible",
+      "attrName": "data-if",
       "enabled": true,
     }]
   ]
@@ -149,7 +149,7 @@ So now it require a few next steps
 3. Write your code
 
 ```jsx
-  <SomeComponent data-visible={isVisible} />
+  <SomeComponent data-if={isVisible} />
 ```
 
 4. Check output for

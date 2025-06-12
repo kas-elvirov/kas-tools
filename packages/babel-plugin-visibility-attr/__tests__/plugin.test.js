@@ -36,8 +36,8 @@ const normalize = str => {
 const POSSIBLE_CASES = [
   {
     input: {
-      condition: '<SomeComponent data-visible={condition} />',
-      falsy: '<SomeComponent data-visible={false} />',
+      condition: '<SomeComponent data-if={condition} />',
+      falsy: '<SomeComponent data-if={false} />',
     },
     output: {
       transformed: 'condition && /*#__PURE__*/React.createElement(SomeComponent, null);',
@@ -48,8 +48,8 @@ const POSSIBLE_CASES = [
   },
   {
     input: {
-      condition: '<SomeComponent data-visible={condition}></SomeComponent>',
-      falsy: '<SomeComponent data-visible={false}></SomeComponent>',
+      condition: '<SomeComponent data-if={condition}></SomeComponent>',
+      falsy: '<SomeComponent data-if={false}></SomeComponent>',
     },
     output: {
       transformed: 'condition && /*#__PURE__*/React.createElement(SomeComponent, null);',
@@ -60,8 +60,8 @@ const POSSIBLE_CASES = [
   },
   {
     input: {
-      condition: '<SomeComponent data-visible={condition}>test</SomeComponent>',
-      falsy: '<SomeComponent data-visible={false}>test</SomeComponent>',
+      condition: '<SomeComponent data-if={condition}>test</SomeComponent>',
+      falsy: '<SomeComponent data-if={false}>test</SomeComponent>',
     },
     output: {
       transformed: 'condition && /*#__PURE__*/React.createElement(SomeComponent, null, "test");',
@@ -72,8 +72,8 @@ const POSSIBLE_CASES = [
   },
   {
     input: {
-      condition: '<SomeComponent data-visible={condition} open={true}>test</SomeComponent>',
-      falsy: '<SomeComponent data-visible={false} open={true}>test</SomeComponent>',
+      condition: '<SomeComponent data-if={condition} open={true}>test</SomeComponent>',
+      falsy: '<SomeComponent data-if={false} open={true}>test</SomeComponent>',
     },
     output: {
       transformed: 'condition && /*#__PURE__*/React.createElement(SomeComponent, { open: true }, "test");',
@@ -84,8 +84,8 @@ const POSSIBLE_CASES = [
   },
   {
     input: {
-      condition: '<SomeComponent data-visible={condition} open={true} {...props}>test</SomeComponent>',
-      falsy: '<SomeComponent data-visible={false} open={true} {...props}>test</SomeComponent>',
+      condition: '<SomeComponent data-if={condition} open={true} {...props}>test</SomeComponent>',
+      falsy: '<SomeComponent data-if={false} open={true} {...props}>test</SomeComponent>',
     },
     output: {
       transformed: 'condition && /*#__PURE__*/React.createElement(SomeComponent, _extends({ open:true},props), "test");',
@@ -96,8 +96,8 @@ const POSSIBLE_CASES = [
   },
   {
     input: {
-      condition: '<SomeComponent data-visible={condition} open={true} {...props}><div>test</div></SomeComponent>',
-      falsy: '<SomeComponent data-visible={false} open={true} {...props}><div>test</div></SomeComponent>',
+      condition: '<SomeComponent data-if={condition} open={true} {...props}><div>test</div></SomeComponent>',
+      falsy: '<SomeComponent data-if={false} open={true} {...props}><div>test</div></SomeComponent>',
     },
     output: {
       transformed: 'condition && /*#__PURE__*/React.createElement(SomeComponent, _extends({ open: true }, props),/*#__PURE__*/React.createElement("div", null, "test"));',

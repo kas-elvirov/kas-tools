@@ -11,7 +11,7 @@ export default function defineVisibilityBabelPlugin(babel: typeof import('@babel
   const { types: t } = babel;
 
   const {
-    attrName = 'data-visible',
+    attrName = 'data-if',
     enabled = true,
   } = pluginOptions;
 
