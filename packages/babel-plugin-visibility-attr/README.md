@@ -16,7 +16,7 @@ And it's transforms into (but you don't see it)
 ## 🔧 Install
 
 ```bash
-npm install babel-plugin-visibility-attr --save-dev
+npm install @kas-tools/babel-plugin-ux-visibility --save-dev
 ```
 
 ## 🧪 Usage
@@ -24,7 +24,7 @@ npm install babel-plugin-visibility-attr --save-dev
 ```json
 {
   "plugins": [
-    ["babel-plugin-visibility-attr", {
+    ["@kas-tools/babel-plugin-ux-visibility", {
       "attrName": "data-visible",
       "enabled": true,
     }]
@@ -37,13 +37,13 @@ npm install babel-plugin-visibility-attr --save-dev
 ### Input in dev mode
 
 ```jsx
-<Box data-visible={isVisible} />
+<SomeComponent data-visible={isVisible} />
 ```
 
-### Output in production
+### Output in production build
 
 ```jsx
-isVisible && <Box />;
+isVisible && <SomeComponent />;
 ```
 
 ## 🧪 Test
