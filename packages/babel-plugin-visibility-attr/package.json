@@ -7,6 +7,9 @@
     "email": "kas.elvirov@gmail.com",
     "url": "https://kas-elvirov.com"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
