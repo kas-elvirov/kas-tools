@@ -132,14 +132,14 @@ So now it require a few next steps
 
 1. Install plugin
 
-> npm install @kas-tools/babel-plugin-ux-visibility --save-dev
+> npm install @kas-tools/babel-plugin-visibility-attr --save-dev
 
 2. Configure babel.config.js
 
 ```json
 {
   "plugins": [
-    ["@kas-tools/babel-plugin-ux-visibility", {
+    ["@kas-tools/babel-plugin-visibility-attr", {
       "attrName": "data-visible",
       "enabled": true,
     }]

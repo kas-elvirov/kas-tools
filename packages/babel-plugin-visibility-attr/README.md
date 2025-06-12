@@ -1,4 +1,4 @@
-# @kas-tools/babel-plugin-ux-visibility
+# @kas-tools/babel-plugin-visibility-attr
 
 A Babel plugin that transforms `data-visible` attributes into conditional rendering expressions (`cond && <Component />`) at build time
 
@@ -16,7 +16,7 @@ And it's transforms into (but you don't see it)
 ## 🔧 Install
 
 ```bash
-npm install @kas-tools/babel-plugin-ux-visibility --save-dev
+npm install @kas-tools/babel-plugin-visibility-attr --save-dev
 ```
 
 ## 🧪 Usage
@@ -24,7 +24,7 @@ npm install @kas-tools/babel-plugin-ux-visibility --save-dev
 ```json
 {
   "plugins": [
-    ["@kas-tools/babel-plugin-ux-visibility", {
+    ["@kas-tools/babel-plugin-visibility-attr", {
       "attrName": "data-visible",
       "enabled": true,
     }]
