@@ -1,10 +1,6 @@
 import type { Config } from 'jest';
 
 const config: Config = {
-  // preset: 'ts-jest',
-  // testEnvironment: 'node',
-  // testMatch: ['**/__tests__/plugin.test.js'],
-  // roots: ['<rootDir>'],
   // moduleFileExtensions: ['ts', 'js'],
   // globals: {
   //   'ts-jest': {
@@ -12,12 +8,14 @@ const config: Config = {
   //   },
   // },
 
+  testMatch: ['**/__tests__/plugin.test.js'],
+  roots: ['<rootDir>'],
   preset: 'ts-jest',
   testEnvironment: 'node',
   transform: {},
   collectCoverage: true,
   coverageDirectory: 'coverage',
-  coverageProvider: 'v8', // или 'babel' если используешь Babel
+  coverageProvider: 'v8',
   coverageReporters: ['text', 'lcov'],
   coveragePathIgnorePatterns: ['/node_modules/', '/__tests__/'],
 };
