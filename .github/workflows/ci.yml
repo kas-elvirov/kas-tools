@@ -34,16 +34,6 @@ jobs:
       - uses: ./.github/actions/setup
       - name: Build project
         run: pnpm build
-      - name: Create Versions and Changelogs
-        run: pnpm changeset version
-      - name: Commit and Push
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/kas-elvirov/kas-tools.git
-          git add .
-          git commit -m "chore: versions and changelog update"
-          git push
       - name: Publish with Changesets
         run: pnpm exec changeset publish
         env:
