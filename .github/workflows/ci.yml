@@ -36,8 +36,6 @@ jobs:
         run: pnpm build
       - name: Create Versions and Changelogs
         run: pnpm changeset version
-      - name: Test printing your secret (Remove this step in production)
-        run: cat $HOME/secrets/my_secret.json
       - name: Commit and Push
         run: |
           git config --global user.name "github-actions[bot]"
