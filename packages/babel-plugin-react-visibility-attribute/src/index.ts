@@ -1,19 +1,18 @@
-import type { PluginObj } from '@babel/core';
 import * as babelTypes from '@babel/types';
-
+import type { PluginObj } from '@babel/core';
 
 interface IPluginOptions {
   attrName?: string;
   enabled?: boolean;
 }
 
-export default function defineVisibilityBabelPlugin(babel: typeof import('@babel/core'), pluginOptions: IPluginOptions = {}): PluginObj {
+export default function defineVisibilityBabelPlugin(
+  babel: typeof import('@babel/core'),
+  pluginOptions: IPluginOptions = {},
+): PluginObj {
   const { types: t } = babel;
 
-  const {
-    attrName = 'data-if',
-    enabled = true,
-  } = pluginOptions;
+  const { attrName = 'data-if', enabled = true } = pluginOptions;
 
   return {
     visitor: {
@@ -21,19 +20,19 @@ export default function defineVisibilityBabelPlugin(babel: typeof import('@babel
         if (!enabled) {
           /**
            * Plugin is disabled
-          */
+           */
           return;
         }
 
         /**
          * Plugin is enabled
-        */
+         */
 
         const opening = path.node.openingElement;
         const attrs = opening.attributes;
 
         const attrIndex = attrs.findIndex(
-          (attr) => t.isJSXAttribute(attr) && attr.name.name === attrName
+          attr => t.isJSXAttribute(attr) && attr.name.name === attrName,
         );
 
         if (attrIndex === -1) {
@@ -56,14 +55,14 @@ export default function defineVisibilityBabelPlugin(babel: typeof import('@babel
          * In total
          * - excluding `JSXEmptyExpression`
          * - casting to `Expression`
-        */
+         */
         let attrValue: babelTypes.Expression = t.booleanLiteral(true);
 
         if (attrNode.value) {
           if (t.isJSXExpressionContainer(attrNode.value)) {
             /**
              * `t.isExpression()` is unique check which excluding `JSXEmptyExpression`
-            */
+             */
             if (t.isExpression(attrNode.value.expression)) {
               attrValue = attrNode.value.expression;
             }
@@ -74,7 +73,7 @@ export default function defineVisibilityBabelPlugin(babel: typeof import('@babel
 
         /**
          * Remove an attribute
-        */
+         */
         attrs.splice(attrIndex, 1);
 
         const conditional = t.logicalExpression('&&', attrValue, path.node);
@@ -83,20 +82,16 @@ export default function defineVisibilityBabelPlugin(babel: typeof import('@babel
 
         /**
          * If `JSXElement` insoide `JSX`, return `JSXExpressionContainer`
-        */
+         */
         if (t.isJSXElement(parent?.node) || t.isJSXFragment(parent?.node)) {
-          path.replaceWith(
-            t.jsxExpressionContainer(conditional)
-          );
+          path.replaceWith(t.jsxExpressionContainer(conditional));
         } else {
           /**
            * Otherwise - `ExpressionStatement`
-          */
-          path.replaceWith(
-            t.expressionStatement(conditional)
-          );
+           */
+          path.replaceWith(t.expressionStatement(conditional));
         }
       },
     },
   };
-};
+}

@@ -73,6 +73,7 @@ const SomeComponent: FC<ISomeComponentProps> = (props) => {
 ## Using HOCs
 
 Check out [live preview](https://codesandbox.io/p/sandbox/734ytn?file=%2Fsrc%2FApp.tsx%3A13%2C1) in order to see how ugly it is
+
 - it's hard to read (first time and you have adapt)
 - you have to know about this method in order to know what you have to do
 - logic of one component is separated into next places
@@ -136,7 +137,7 @@ So now it require a few next steps
 
 2. Configure babel.config.js
 
-```json
+````json
 {
   "plugins": [
     ["@kas-tools/babel-plugin-react-visibility-attribute", {
@@ -150,7 +151,7 @@ So now it require a few next steps
 
 ```jsx
   <SomeComponent data-if={isVisible} />
-```
+````
 
 4. Check output for
 

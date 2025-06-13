@@ -7,7 +7,7 @@ const plugin = require('../src/index');
 
 /**
  * Just wrapper to write less code
-*/
+ */
 const transformWrapper = (code, opts = {}, transformOpts = {}) => {
   return babel.transform(code, {
     filename: 'file.jsx',
@@ -20,7 +20,7 @@ const transformWrapper = (code, opts = {}, transformOpts = {}) => {
 
 /**
  * Normalization of strings that differ slightly in formatting but are semantically identical
-*/
+ */
 const normalize = str => {
   return str.replace(/\s+/g, '');
 };
@@ -32,7 +32,7 @@ const normalize = str => {
  * - outputs for then are Doesn't quite beautiful what we see in "toContain"
  * but it's what we are expecting for
  * - condition && <SomeComponent />
-*/
+ */
 const POSSIBLE_CASES = [
   {
     input: {
@@ -76,7 +76,8 @@ const POSSIBLE_CASES = [
       falsy: '<SomeComponent data-if={false} open={true}>test</SomeComponent>',
     },
     output: {
-      transformed: 'condition && /*#__PURE__*/React.createElement(SomeComponent, { open: true }, "test");',
+      transformed:
+        'condition && /*#__PURE__*/React.createElement(SomeComponent, { open: true }, "test");',
       ast: 'React.createElement(SomeComponent',
       jsx: 'condition && <SomeComponent open={true}>test</SomeComponent>;',
       falsy: 'false && /*#__PURE__*/React.createElement(SomeComponent, { open: true }, "test");',
@@ -88,28 +89,34 @@ const POSSIBLE_CASES = [
       falsy: '<SomeComponent data-if={false} open={true} {...props}>test</SomeComponent>',
     },
     output: {
-      transformed: 'condition && /*#__PURE__*/React.createElement(SomeComponent, _extends({ open:true},props), "test");',
+      transformed:
+        'condition && /*#__PURE__*/React.createElement(SomeComponent, _extends({ open:true},props), "test");',
       ast: 'condition && /*#__PURE__*/React.createElement(SomeComponent, _extends({ open:true},props), "test");',
       jsx: 'condition && <SomeComponent open={true} {...props}>test</SomeComponent>;',
-      falsy: 'false && /*#__PURE__*/React.createElement(SomeComponent, _extends({ open:true }, props), "test");',
+      falsy:
+        'false && /*#__PURE__*/React.createElement(SomeComponent, _extends({ open:true }, props), "test");',
     },
   },
   {
     input: {
-      condition: '<SomeComponent data-if={condition} open={true} {...props}><div>test</div></SomeComponent>',
-      falsy: '<SomeComponent data-if={false} open={true} {...props}><div>test</div></SomeComponent>',
+      condition:
+        '<SomeComponent data-if={condition} open={true} {...props}><div>test</div></SomeComponent>',
+      falsy:
+        '<SomeComponent data-if={false} open={true} {...props}><div>test</div></SomeComponent>',
     },
     output: {
-      transformed: 'condition && /*#__PURE__*/React.createElement(SomeComponent, _extends({ open: true }, props),/*#__PURE__*/React.createElement("div", null, "test"));',
+      transformed:
+        'condition && /*#__PURE__*/React.createElement(SomeComponent, _extends({ open: true }, props),/*#__PURE__*/React.createElement("div", null, "test"));',
       ast: 'condition && /*#__PURE__*/React.createElement(SomeComponent, _extends({ open: true }, props),/*#__PURE__*/React.createElement("div", null, "test"));',
       jsx: 'condition && <SomeComponent open={true} {...props}><div>test</div></SomeComponent>;',
-      falsy: 'false && /*#__PURE__*/React.createElement(SomeComponent, _extends({ open: true }, props),/*#__PURE__*/React.createElement("div", null, "test"));',
+      falsy:
+        'false && /*#__PURE__*/React.createElement(SomeComponent, _extends({ open: true }, props),/*#__PURE__*/React.createElement("div", null, "test"));',
     },
   },
 ];
 
 describe('babel-plugin-react-visibility-attribute', () => {
-  each.default(POSSIBLE_CASES).describe('when transforming %s', (testCase) => {
+  each.default(POSSIBLE_CASES).describe('when transforming %s', testCase => {
     it('should match transformed output', () => {
       const result = transformWrapper(testCase.input.condition).code;
 
@@ -131,7 +138,7 @@ describe('babel-plugin-react-visibility-attribute', () => {
 
     it('should preserve JSX intention', () => {
       const result = babel.transformSync(testCase.input.condition, {
-        plugins: [["@babel/plugin-syntax-jsx"], [plugin, {}]],
+        plugins: [['@babel/plugin-syntax-jsx'], [plugin, {}]],
         configFile: false,
         ast: false,
       });

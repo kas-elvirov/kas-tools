@@ -1,0 +1,19 @@
+{
+  "parent": null,
+  "pid": 94630,
+  "argv": [
+    "/usr/local/bin/node",
+    "/Users/kaselvirov/Desktop/data/code/kas-tools/node_modules/nyc/bin/nyc.js",
+    "--reporter=text",
+    "--reporter=lcov",
+    "ts-jest"
+  ],
+  "execArgv": [],
+  "cwd": "/Users/kaselvirov/Desktop/data/code/kas-tools",
+  "time": 1749804391830,
+  "ppid": 94622,
+  "coverageFilename": "/Users/kaselvirov/Desktop/data/code/kas-tools/.nyc_output/620893fb-7ed9-41b0-8e29-b04199263418.json",
+  "externalId": "",
+  "uuid": "620893fb-7ed9-41b0-8e29-b04199263418",
+  "files": []
+}

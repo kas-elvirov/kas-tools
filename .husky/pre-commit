@@ -1,0 +1,11 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🔍 Lint staged files..."
+npx lint-staged
+
+echo "🧪 Run tests and 🗂️ collect coverage..."
+npm run test
+
+echo "📈 Checking coverage..."
+pnpm --filter @kas-tools/babel-plugin-react-visibility-attribute run test:coverage:check

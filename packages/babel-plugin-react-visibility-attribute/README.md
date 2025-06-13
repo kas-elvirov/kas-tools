@@ -9,8 +9,9 @@ The main purpose is to "make markup clean again" ✊
 ## ✨ Features
 
 You write
+
 - `<SomeComponent data-if={condition} />`
-And it's transforms into (but you don't see it)
+  And it's transforms into (but you don't see it)
 - `condition && <SomeComponent />`
 
 ## 🔧 Install
@@ -22,21 +23,26 @@ npm install @kas-tools/babel-plugin-react-visibility-attribute --save-dev
 ## 🧪 Usage
 
 **babel.config.js**
-```json
 
+```json
 {
   "plugins": [
-    ["@kas-tools/babel-plugin-react-visibility-attribute", {
-      "attrName": "data-if",
-      "enabled": true,
-    }]
+    [
+      "@kas-tools/babel-plugin-react-visibility-attribute",
+      {
+        "attrName": "data-if",
+        "enabled": true
+      }
+    ]
   ]
 }
 ```
 
 **vite.config.js**
+
 ```js
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vite';
+
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
@@ -44,15 +50,18 @@ export default defineConfig({
     react({
       babel: {
         plugins: [
-          ['@kas-tools/babel-plugin-react-visibility-attribute', {
-            attrName: 'data-if',
-            enabled: true
-          }]
-        ]
-      }
-    })
-  ]
-})
+          [
+            '@kas-tools/babel-plugin-react-visibility-attribute',
+            {
+              attrName: 'data-if',
+              enabled: true,
+            },
+          ],
+        ],
+      },
+    }),
+  ],
+});
 ```
 
 ## 🧾 Example
@@ -69,14 +78,12 @@ export default defineConfig({
 // If isVisible === true
 
 <SomeComponent />
-
 ```
 
 ```jsx
 // If isVisible === false
 
-null // nothing
-
+null; // nothing
 ```
 
 ### Output in production build
@@ -93,6 +100,7 @@ npm test
 ```
 
 ## 🖤 Inspiration
+
 This package inspired by post [How to add custom attribute for conditional render?](https://stackoverflow.com/questions/79662332/how-to-add-custom-attribute-for-conditional-render) from [Mahdi](https://stackoverflow.com/users/2535843/mahdi) ([github](https://github.com/mahdix), [official website](https://mahdix.com/))
 
 ---

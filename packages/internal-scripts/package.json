@@ -1,0 +1,23 @@
+{
+  "name": "@kas-tools/internal-scripts",
+  "description": "Set of my personal hooks, utils, scripts, configs and so on",
+  "author": {
+    "name": "Kas Elvirov",
+    "email": "kas.elvirov@gmail.com",
+    "url": "https://kas-elvirov.com"
+  },
+  "private": true,
+  "type": "module",
+  "version": "0.0.0",
+  "main": "./index.js",
+  "scripts": {
+    "init-husky": "bash ./scripts/init-husky.sh"
+  },
+  "devDependencies": {
+    "@commitlint/config-conventional": "^19.0.0",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+    "commitlint": "^19.0.0",
+    "husky": "^9.0.0",
+    "lint-staged": "^15.0.0"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "parent": "ba6c2791-8a75-4289-9f67-3875144115a4",
+  "pid": 95422,
+  "argv": [
+    "/usr/local/bin/node",
+    "/Users/kaselvirov/Desktop/data/code/kas-tools/node_modules/.pnpm/jest-worker@30.0.0/node_modules/jest-worker/build/processChild.js"
+  ],
+  "execArgv": [],
+  "cwd": "/Users/kaselvirov/Desktop/data/code/kas-tools/packages/babel-plugin-react-visibility-attribute",
+  "time": 1749804669486,
+  "ppid": 95392,
+  "coverageFilename": "/Users/kaselvirov/Desktop/data/code/kas-tools/packages/babel-plugin-react-visibility-attribute/.nyc_output/db8ea5ad-637b-4380-a692-9391f39bfc8d.json",
+  "externalId": "",
+  "uuid": "db8ea5ad-637b-4380-a692-9391f39bfc8d",
+  "files": []
+}

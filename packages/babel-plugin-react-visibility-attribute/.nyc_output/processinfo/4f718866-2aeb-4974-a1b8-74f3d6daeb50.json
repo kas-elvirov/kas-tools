@@ -1,0 +1,19 @@
+{
+  "parent": null,
+  "pid": 95382,
+  "argv": [
+    "/usr/local/bin/node",
+    "/Users/kaselvirov/Desktop/data/code/kas-tools/node_modules/nyc/bin/nyc.js",
+    "--reporter=text",
+    "--reporter=lcov",
+    "jest"
+  ],
+  "execArgv": [],
+  "cwd": "/Users/kaselvirov/Desktop/data/code/kas-tools/packages/babel-plugin-react-visibility-attribute",
+  "time": 1749804666017,
+  "ppid": 95372,
+  "coverageFilename": "/Users/kaselvirov/Desktop/data/code/kas-tools/packages/babel-plugin-react-visibility-attribute/.nyc_output/4f718866-2aeb-4974-a1b8-74f3d6daeb50.json",
+  "externalId": "",
+  "uuid": "4f718866-2aeb-4974-a1b8-74f3d6daeb50",
+  "files": []
+}

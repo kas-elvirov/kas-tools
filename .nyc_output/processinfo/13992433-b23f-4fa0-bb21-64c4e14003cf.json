@@ -1,0 +1,16 @@
+{
+  "parent": null,
+  "pid": 94639,
+  "argv": [
+    "/usr/local/bin/node",
+    "/Users/kaselvirov/Desktop/data/code/kas-tools/node_modules/ts-jest/cli.js"
+  ],
+  "execArgv": [],
+  "cwd": "/Users/kaselvirov/Desktop/data/code/kas-tools",
+  "time": 1749804392883,
+  "ppid": 94630,
+  "coverageFilename": "/Users/kaselvirov/Desktop/data/code/kas-tools/.nyc_output/13992433-b23f-4fa0-bb21-64c4e14003cf.json",
+  "externalId": "",
+  "uuid": "13992433-b23f-4fa0-bb21-64c4e14003cf",
+  "files": []
+}

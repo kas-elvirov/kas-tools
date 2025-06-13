@@ -10,6 +10,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
@@ -21,8 +22,12 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "lint": "eslint index.ts",
-    "test": "jest --config jest.config.ts"
+    "check": "prettier --check .",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "test": "jest --config jest.config.ts",
+    "test:coverage:collect": "nyc --reporter=text --reporter=lcov jest",
+    "test:coverage:check": "pnpm nyc check-coverage --lines 80 --functions 80 --branches 80"
   },
   "peerDependencies": {
     "@babel/core": "^7.0.0"
