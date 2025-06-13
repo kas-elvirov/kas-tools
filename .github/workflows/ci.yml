@@ -34,6 +34,12 @@ jobs:
       - uses: ./.github/actions/setup
       - name: Build project
         run: pnpm build
+      - name: Check NPM_TOKEN existence
+        run: |
+          if [ -z "$NPM_TOKEN" ]; then echo "❌ NPM_TOKEN is empty"; exit 1; fi
+          echo "✅ NPM_TOKEN is available"
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Publish with Changesets
         run: pnpm exec changeset publish
         env:
