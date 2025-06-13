@@ -4,6 +4,15 @@ A Babel plugin that transforms `data-if` attributes into conditional rendering e
 
 ---
 
+![JSX-first](https://img.shields.io/badge/JSX--first-%23e10098.svg)
+![Zero-runtime](https://img.shields.io/badge/zero--runtime-%23green.svg)
+![UX declarative](https://img.shields.io/badge/UX--attribute--driven-blueviolet)
+![npm version](https://img.shields.io/npm/v/@kas-tools/babel-plugin-react-visibility-attribute)
+![npm downloads](https://img.shields.io/npm/dm/@kas-tools/babel-plugin-react-visibility-attribute)
+![Build](https://github.com/kas-elvirov/kas-tools/actions/workflows/ci.yml/badge.svg)
+
+---
+
 The main purpose is to "make markup clean again" ✊
 
 ## ✨ Features
